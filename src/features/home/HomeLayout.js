@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import ProductCard from "../../ui/ProductCard";
+import ProductCard from "./ProductCard";
 
 const StyledHomeLayout = styled.div`
   display: grid;

@@ -1,8 +1,8 @@
-import Header from "../ui/Header";
-import Footer from "../ui/Footer";
 import { styled } from "styled-components";
 import { Outlet } from "react-router-dom";
-import { CartProvider } from "../context/CartContext";
+
+import Header from "../ui/Header";
+import Footer from "../ui/Footer";
 
 const Main = styled.main`
   padding: 40px 20px;
@@ -16,7 +16,7 @@ const Container = styled.div`
 
 function AppLayout() {
   return (
-    <CartProvider>
+    <>
       <Header />
       <Main>
         <Container>
@@ -24,7 +24,7 @@ function AppLayout() {
         </Container>
       </Main>
       <Footer />
-    </CartProvider>
+    </>
   );
 }
 

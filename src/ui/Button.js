@@ -44,6 +44,7 @@ const variations = {
 };
 
 const Button = styled.button`
+  width: fit-content;
   border: none;
   color: var(--color-grey-200);
   font-weight: 600;

@@ -1,15 +1,18 @@
 import { styled } from "styled-components";
-import CartCard from "../../ui/CartCard";
-import { useCart } from "../../context/CartContext";
+import CartCard from "./CartCard";
 import Empty from "../../ui/Empty";
+import { useSelector } from "react-redux";
 
 const StyledCartLayout = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  /* display: grid;
+  grid-template-columns: repeat(2, 1fr); */
 `;
 
-// const cartProducts = [
+// const cartList = [
 //   {
 //     id: 1,
 //     name: "boAt Rockerz 400 Bluetooth",
@@ -25,19 +28,19 @@ const StyledCartLayout = styled.div`
 // ];
 
 function CartLayout() {
-  const { cartList, total } = useCart();
+  const { cartItems, totalPrice } = useSelector((store) => store.cart);
 
   return (
     <StyledCartLayout>
-      {cartList.length === 0 ? (
+      {cartItems.length === 0 ? (
         <Empty>Your cart is empty 😟</Empty>
       ) : (
         <>
           <h2>
-            Cart: {cartList.length} / ${total}
+            Cart: {cartItems.length} / ${totalPrice}
           </h2>
 
-          {cartList.map((product) => (
+          {cartItems.map((product) => (
             <CartCard key={product.id} product={product} />
           ))}
         </>

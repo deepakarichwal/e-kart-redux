@@ -1,7 +1,7 @@
+import { useDispatch, useSelector } from "react-redux";
 import { styled } from "styled-components";
-
-import Button from "./Button";
-import { useCart } from "../context/CartContext";
+import Button from "../../ui/Button";
+import { addToCart, removeFromCart } from "../cart/cartSlice";
 
 const StyledCard = styled.div`
   /* box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05); */
@@ -37,9 +37,20 @@ const Price = styled.span`
 
 function ProductCard({ product }) {
   const { id, name, price, image } = product;
-  const { addToCart, removeFromCart, cartList } = useCart();
 
-  const productInCart = cartList.find((product) => product.id === id);
+  const { cartItems } = useSelector((store) => store.cart);
+
+  const dispatch = useDispatch();
+
+  function handleAdd() {
+    dispatch(addToCart(product));
+  }
+
+  function handleRemove() {
+    dispatch(removeFromCart(product));
+  }
+
+  const productInCart = cartItems.find((item) => item.id === id);
 
   return (
     <>
@@ -52,14 +63,11 @@ function ProductCard({ product }) {
             <Price>${price}</Price>
 
             {productInCart ? (
-              <Button
-                variation="danger"
-                onClick={() => removeFromCart(product)}
-              >
+              <Button onClick={handleRemove} variation="danger">
                 Remove
               </Button>
             ) : (
-              <Button onClick={() => addToCart(product)}>Add to cart</Button>
+              <Button onClick={handleAdd}>Add to cart</Button>
             )}
           </InnerInfo>
         </Info>

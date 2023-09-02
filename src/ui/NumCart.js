@@ -1,9 +1,9 @@
-import { useCart } from "../context/CartContext";
+import { useSelector } from "react-redux";
 
 function NumCart() {
-  const { cartList } = useCart();
+  const { cartItems } = useSelector((store) => store.cart);
 
-  return <span>Cart: {cartList.length}</span>;
+  return <span>Cart: {cartItems.length}</span>;
 }
 
 export default NumCart;
